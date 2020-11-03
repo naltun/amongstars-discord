@@ -28,8 +28,8 @@ python3 bot.py
 ### How to get the Discord token 
 1. Create an application on Discord dev portal [here](https://discord.com/developers/applications)
 2. Select `Bot` on the left menu and create one. 
-3. Roll on the bottom of that page, check `Administrator`, then copy and open the link in your browser to add the bot to a server.
-4. Go back on the previous page and copy the token on the top of the page. 
+3. Select `OAuth` on the left menu, check `Bot`, then check `Administrator`, then copy and open the link in your browser to add the bot to a server.
+4. Go back on the `Bot` tab and copy the token on the top of the page. 
 
 ## Usage
 | Command | Meaning |
