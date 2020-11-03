@@ -37,6 +37,5 @@ python3 bot.py
 | `>land` | Find a new planet and land on it | 
 | `>discover` | Discover a new element of the planet |
 | `>log <your entry>` | Add the description of the element and your feelings into the log |
-| `>save` | Save your log |
 | `>burn` | Burn your log |
 | `>read` | Read your log |
