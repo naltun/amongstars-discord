@@ -20,24 +20,24 @@ def jsonRead(fileName, user):
 # Commands
 @bot.command()
 async def ping(ctx):
-	author = ctx.message.author.id
+	author = ctx.message.author.mention
 	await ctx.send(f'pong, I am operational :smile: {author}')
 	print(f"Sent pong {author}")
 
 @bot.command()
 async def land(ctx):
-	author = ctx.message.author.id
+	author = ctx.message.author.mention
 	diceRoll = random.randint(1,6)
 	jsonWrite("data.json", author, diceRoll)
-	await ctx.send(f"You just landed on a new planet! :rocket:\n There are {diceRoll} things to discover here. :star:")
+	await ctx.send(f"{author} just landed on a new planet! :rocket:\n There are {diceRoll} things to discover here. :star:")
 
 @bot.command()
 async def discover(ctx):
-	author = str(ctx.message.author.id)
+	author = str(ctx.message.author.mention)
 	#d = json.loads(open("data.json").read())
 	d = jsonRead("data.json", author)
 	if d > 0:
-		message = ''
+		message = f'{author}'
 
 		event = random.randint(1,4)
 		if event == 1:
@@ -89,21 +89,40 @@ async def discover(ctx):
 		await ctx.send(message)
 		jsonWrite("data.json", author, d-1)
 	else:
-		await ctx.send("You are still in your spaceship, you can't explore yet. Please `>land` first. :rocket:")
+		await ctx.send(f"{author} You are still in your spaceship, you can't explore yet. Please `>land` first. :rocket:")
 
 @bot.command()
 async def log(ctx, *, content):
-	author = ctx.message.author.id
-	oldContent = jsonRead("log.json", author)
-	newContent = oldContent + "\n---\n" + content
+	author = ctx.message.author.mention
+	try:
+		oldContent = jsonRead("log.json", author)
+		newContent = oldContent + "\n---\n" + content
+	except:
+		newContent = content
 	jsonWrite("log.json", author, newContent)
-	await ctx.send("Your log have been saved :book:")
+	await ctx.send(f"{author} Your log have been saved :book:")
+
+@bot.command()
+async def burn(ctx):
+	author = ctx.message.author.mention
+	deletionList = []
+	async for message in ctx.channel.history():
+		if ">land" in message.content:
+			break
+		elif message.author.mention == author:
+			deletionList.append(message)
+		elif author in message.content and message.author.bot:
+			deletionList.append(message)
+
+	# Removing the internal log
+	jsonWrite("log.json", author, "Your log have burned :fire:")
+	await ctx.channel.delete_messages(deletionList)
 
 @bot.command()
 async def read(ctx):
-	author = ctx.message.author.id
+	author = ctx.message.author.mention
 	content = jsonRead("log.json", author)
-	await ctx.send(content)
+	await ctx.send(f"This is the log of {author}\n---\n{content}")
 
 # Starting up the bot
 print("The bot is ready")
