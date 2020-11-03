@@ -116,6 +116,7 @@ async def burn(ctx):
 	deletionList = []
 	async for message in ctx.channel.history():
 		if ">land" in message.content:
+			deletionList.append(message)
 			break
 		elif message.author.mention == author:
 			deletionList.append(message)
