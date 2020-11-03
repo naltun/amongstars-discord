@@ -7,13 +7,21 @@ bot = commands.Bot(command_prefix='>')
 
 # External commands
 def jsonWrite(fileName, user, data):
-	file = open(fileName).read()
+	try:
+		file = open(fileName).read()
+	except:
+		open(fileName, 'w').write("{}")
+		file = open(fileName).read()
 	file = json.loads(file)
 	file[str(user)] = data
 	file = open(fileName, "w").write(json.dumps(file))
 
 def jsonRead(fileName, user):
-	file = open(fileName).read()
+	try:
+		file = open(fileName).read()
+	except:
+		open(fileName, 'w').write("{}")
+		file = open(fileName).read()
 	file = json.loads(file)
 	return file[str(user)]
 
