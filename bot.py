@@ -124,8 +124,11 @@ async def burn(ctx):
 			deletionList.append(message)
 
 	# Removing the internal log
-	jsonWrite("log.json", author, "Your log have burned :fire:")
-	await ctx.channel.delete_messages(deletionList)
+	jsonWrite("log.json", author, "Your log burned :fire:")
+	try:
+		await ctx.channel.delete_messages(deletionList)
+	except:
+		await ctx.send("I don't have the permission to remove the messages in the chat :no_entry:")
 
 @bot.command()
 async def read(ctx):
