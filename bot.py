@@ -42,7 +42,6 @@ async def land(ctx):
 @bot.command()
 async def discover(ctx):
 	author = str(ctx.message.author.mention)
-	#d = json.loads(open("data.json").read())
 	d = jsonRead("data.json", author)
 	if d > 0:
 		message = f'{author}'
@@ -113,28 +112,41 @@ async def log(ctx, *, content):
 @bot.command()
 async def burn(ctx):
 	author = ctx.message.author.mention
-	deletionList = []
-	async for message in ctx.channel.history():
-		if ">land" in message.content:
-			deletionList.append(message)
-			break
-		elif message.author.mention == author:
-			deletionList.append(message)
-		elif author in message.content and message.author.bot:
-			deletionList.append(message)
-
-	# Removing the internal log
 	jsonWrite("log.json", author, "Your log burned :fire:")
-	try:
-		await ctx.channel.delete_messages(deletionList)
-	except:
-		await ctx.send("I don't have the permission to remove the messages in the chat :no_entry:")
+	await ctx.send("Your log have been :burned:")
 
 @bot.command()
-async def read(ctx):
-	author = ctx.message.author.mention
-	content = jsonRead("log.json", author)
-	await ctx.send(f"This is the log of {author}\n---\n{content}")
+async def read(ctx, target=None):
+	mention = target
+	if target is None:
+		target = ctx.message.author.mention
+	else:
+		target = mention.split("!")[0] + mention.split("!")[1]
+
+	try:
+		journal = jsonRead("log.json", author)
+		if journal == "":
+			await ctx.send("Your journal are empty...")
+
+		try:
+			await ctx.send(f"This is the log of {target}\n---\n{content}")
+		except:
+			for entry in journal:
+				await ctx.send(f"{entry}\n---\n")
+	except:
+		await ctx.send("Your journal log is empty")
+
+@bot.command()
+async def backup(ctx):
+        try:
+                file = open("log.json")
+                discordFile = discord.File(fp=file)
+        except:
+                await ctx.send("There is no content saved")
+        try:
+                await ctx.send(file=discordFile)
+        except:
+                await ctx.send("I cannot post the file :no_entry:")
 
 # Starting up the bot
 print("The bot is ready")
