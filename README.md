@@ -3,6 +3,15 @@
 
 This is a Python Discord bot. 
 
+## Features
+* Solo playing of "Alone Among the Stars"
+* Ability to burn the ship log
+* Ability to log new entries
+* Ability to generate a new planet
+* Ability to backup the data
+* Ability to read the full log of a user
+* Ability to use the bot in private messages
+
 ## Building
 1. Make sure you have Python3 and Python3-pip installed
 2. Install the depedencies
