@@ -1,9 +1,7 @@
-git clone https://codeberg.org/SnowCode/amongstars-discord
-cd amongstars-discord
 rm .gitignore
 git remote remove origin
 
-#heroku login
+heroku login
 echo "Please enter the name of the app (on heroku)"
 read NAME
 heroku git:remote -a $NAME
