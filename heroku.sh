@@ -3,7 +3,7 @@ cd amongstars-discord
 rm .gitignore
 git remote remove origin
 
-heroku login
+#heroku login
 read NAME
 heroku git:remote -a $NAME
 
