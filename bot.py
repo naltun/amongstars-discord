@@ -27,12 +27,6 @@ def jsonRead(fileName, user):
 
 # Commands
 @bot.command()
-async def ping(ctx):
-	author = ctx.message.author.mention
-	await ctx.send(f'pong, I am operational :smile: {author}')
-	print(f"Sent pong {author}")
-
-@bot.command()
 async def land(ctx):
 	author = ctx.message.author.mention
 	diceRoll = random.randint(1,6)
