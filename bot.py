@@ -131,6 +131,7 @@ async def read(ctx, target=None):
 		try:
 			await ctx.send(f"This is the log of {target}\n---\n{content}")
 		except:
+			journal = journal.split("\n---\n")
 			for entry in journal:
 				await ctx.send(f"{entry}\n---\n")
 	except:
