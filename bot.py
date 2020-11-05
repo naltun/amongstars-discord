@@ -31,7 +31,10 @@ async def land(ctx):
 	author = ctx.message.author.mention
 	diceRoll = random.randint(1,6)
 	jsonWrite("data.json", author, diceRoll)
-	await ctx.send(f"{author} just landed on a new planet! :rocket:\n There are {diceRoll} things to discover here. :star:")
+	if diceRoll == 1:
+		await ctx.send(f"{author} just landed on a new planet! :rocket:\n There is {diceRoll} thing to `>discover` here. :star:")
+	else:
+		await ctx.send(f"{author} just landed on a new planet! :rocket:\n There are {diceRoll} things to `>discover` here. :star:")
 
 @bot.command()
 async def discover(ctx):
@@ -101,13 +104,13 @@ async def log(ctx, *, content):
 	except:
 		newContent = content
 	jsonWrite("log.json", author, newContent)
-	await ctx.send(f"{author} Your log have been saved :book:")
+	await ctx.send(f"{author} Your entry have been saved :book:")
 
 @bot.command()
 async def burn(ctx):
 	author = ctx.message.author.mention
 	jsonWrite("log.json", author, "")
-	await ctx.send("Your log have been burned :fire:")
+	await ctx.send("Your journal have been burned :fire:")
 
 @bot.command()
 async def read(ctx, target=None):
@@ -120,7 +123,7 @@ async def read(ctx, target=None):
 	try:
 		journal = jsonRead("log.json", target)
 		if journal == "":
-			await ctx.send("Your journal are empty...")
+			await ctx.send("Your journal is empty...")
 
 		try:
 			await ctx.send(f"This is the log of {target}\n---\n{content}")
@@ -129,19 +132,19 @@ async def read(ctx, target=None):
 			for entry in journal:
 				await ctx.send(f"{entry}\n---\n")
 	except:
-		await ctx.send("Your journal log is empty")
+		await ctx.send("Your journal is empty")
 
 @bot.command()
 async def backup(ctx):
         try:
                 file = open("log.json")
                 discordFile = discord.File(fp=file)
+		try:
+			await ctx.send(file=discordFile)
+		except:
+			await ctx.send("I cannot post the file :no_entry:")
         except:
                 await ctx.send("There is no content saved")
-        try:
-                await ctx.send(file=discordFile)
-        except:
-                await ctx.send("I cannot post the file :no_entry:")
 
 # Starting up the bot
 print("The bot is ready")
