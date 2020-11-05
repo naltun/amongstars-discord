@@ -124,7 +124,7 @@ async def read(ctx, target=None):
 		target = mention.split("!")[0] + mention.split("!")[1]
 
 	try:
-		journal = jsonRead("log.json", author)
+		journal = jsonRead("log.json", target)
 		if journal == "":
 			await ctx.send("Your journal are empty...")
 
