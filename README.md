@@ -3,6 +3,9 @@
 
 This is a Python Discord bot. 
 
+## Use the bot
+I don't publish a simple link yet because it's not stable enough, but you can use the bot on [this server](https://discord.gg/8bQmePhzef)
+
 ## Features
 * Solo playing of "Alone Among the Stars"
 * Ability to burn the ship log
