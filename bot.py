@@ -136,15 +136,15 @@ async def read(ctx, target=None):
 
 @bot.command()
 async def backup(ctx):
-        try:
-                file = open("log.json")
-                discordFile = discord.File(fp=file)
+	try:
+		file = open("log.json")
+		discordFile = discord.File(fp=file)
 		try:
 			await ctx.send(file=discordFile)
 		except:
 			await ctx.send("I cannot post the file :no_entry:")
-        except:
-                await ctx.send("There is no content saved")
+	except:
+		await ctx.send("There is no content saved")
 
 # Starting up the bot
 print("The bot is ready")
