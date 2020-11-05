@@ -12,4 +12,4 @@ echo "$TOKEN" > token.txt
 
 git add .
 git commit -m "Adding token and removing gitignore"
-git push heroku master
+git push heroku master --force
