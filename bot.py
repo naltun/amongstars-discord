@@ -126,8 +126,9 @@ async def read(ctx, target=None):
 			await ctx.send("Your journal is empty...")
 
 		try:
-			await ctx.send(f"This is the log of {target}\n---\n{content}")
+			await ctx.send(f"This is the log of {target}\n---\n{journal}")
 		except:
+			await ctx.send(f"This is the log of {target}")
 			journal = journal.split("\n---\n")
 			for entry in journal:
 				await ctx.send(f"{entry}\n---\n")
