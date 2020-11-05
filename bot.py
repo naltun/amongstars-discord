@@ -112,8 +112,8 @@ async def log(ctx, *, content):
 @bot.command()
 async def burn(ctx):
 	author = ctx.message.author.mention
-	jsonWrite("log.json", author, "Your log burned :fire:")
-	await ctx.send("Your log have been :burned:")
+	jsonWrite("log.json", author, "")
+	await ctx.send("Your log have been burned :fire:")
 
 @bot.command()
 async def read(ctx, target=None):
